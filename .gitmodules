@@ -1,0 +1,4 @@
+[submodule "adifc14"]
+	path = adifc14
+	url = https://gitlab.esss.lu.se/joaopaulomartins/adifc14
+	ignore = all

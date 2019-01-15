@@ -1,0 +1,21 @@
+>>
+Script is used     : e3TemplateGenerator.bash
+Script Path        : /home/joaopaulomartins/work/e3/e3-tools/e3TemplateGenerator
+User               : joaopaulomartins
+Log Time           : 2019jan15-0953-44CET
+e3 repo Hash       : 4d21c8f
+
+>>
+>> Your sources are located in https://gitlab.esss.lu.se/joaopaulomartins.
+>> git submodule will be used.
+>> 
+EPICS_MODULE_NAME  : adifc14
+E3_MODULE_SRC_PATH : adifc14
+EPICS_MODULE_URL   : https://gitlab.esss.lu.se/joaopaulomartins
+E3_TARGET_URL      : https://github.com/icshwi
+>> 
+e3 module name     : e3-adifc14
+e3 module url full : https://gitlab.esss.lu.se/joaopaulomartins/adifc14
+e3 target url full : https://github.com/icshwi/e3-adifc14
+>> 
+e3 module is located in siteMods

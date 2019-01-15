@@ -35,13 +35,18 @@ include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 # one should look at other modules makefile to add more
 # In most case, one should ignore the following lines:
 
-#ifneq ($(strip $(ASYN_DEP_VERSION)),)
-#asyn_VERSION=$(ASYN_DEP_VERSION)
-#endif
+ifneq ($(strip $(IFCDAQDRV2_DEP_VERSION)),)
+ifcdaqdrv2_VERSION=$(IFCDAQDRV2_DEP_VERSION)
+endif
 
-#ifneq ($(strip $(SEQUENCER_DEP_VERSION)),)
-#sequencer_VERSION=$(SEQUENCER_DEP_VERSION)
-#endif
+
+ifneq ($(strip $(ASYN_DEP_VERSION)),)
+asyn_VERSION=$(ASYN_DEP_VERSION)
+endif
+
+ifneq ($(strip $(ADCORE_DEP_VERSION)),)
+ADCore_VERSION=$(ADCORE_DEP_VERSION)
+endif
 
 
 
@@ -49,12 +54,12 @@ include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 ##EXCLUDE_ARCHS = linux-ppc64e6500
 
 
-# APP:=calcApp
-# APPDB:=$(APP)/Db
-# APPSRC:=$(APP)/src
+APP:=adifc14App
+APPDB:=$(APP)/Db
+APPSRC:=$(APP)/src
 
 
-# USR_INCLUDES += -I$(where_am_I)$(APPSRC)
+USR_INCLUDES += -I$(where_am_I)$(APPSRC)
 
 # USR_CFLAGS   += -Wno-unused-variable
 # USR_CFLAGS   += -Wno-unused-function
@@ -68,6 +73,11 @@ include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 # TEMPLATES += $(wildcard $(APPDB)/*.proto)
 # TEMPLATES += $(wildcard $(APPDB)/*.template)
 
+TEMPLATES += $(APPDB)/ifc1400.template
+
+HEADERS += $(APPSRC)/ifc14.h
+SOURCES += $(APPSRC)/ifc14.cpp
+DBDS += $(APPSRC)/adifc14Support.dbd
 
 # DBDINC_SRCS += $(APPSRC)/swaitRecord.c
 # DBDINC_SRCS += $(APPSRC)/sseqRecord.c

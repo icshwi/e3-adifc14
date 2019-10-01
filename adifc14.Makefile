@@ -68,12 +68,15 @@ USR_INCLUDES += -I$(where_am_I)$(APPSRC)
 # USR_CPPFLAGS += -Wno-unused-function
 # USR_CPPFLAGS += -Wno-unused-but-set-variable
 
+USR_CPPFLAGS += -D_DBG
+
 # TEMPLATES += $(wildcard $(APPDB)/*.db)
 # TEMPLATES += $(wildcard $(APPDB)/*.db)
 # TEMPLATES += $(wildcard $(APPDB)/*.proto)
 # TEMPLATES += $(wildcard $(APPDB)/*.template)
 
 TEMPLATES += $(APPDB)/ifc1400.template
+TEMPLATES += $(APPDB)/ifc1400N.template
 
 HEADERS += $(APPSRC)/ifc14.h
 SOURCES += $(APPSRC)/ifc14.cpp

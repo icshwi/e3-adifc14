@@ -1,0 +1,7 @@
+## start timestamping configuration, depends on TSTAMPEVT macro
+
+# Configuring timestamping
+dbpf $(EVR_NAME)-$(EVR_INDEX):Time-I.EVNT $(TSTAMPEVT)
+dbpf $(EVR_NAME)-$(EVR_INDEX):Time-I.INP "@OBJ=$(EVR_INDEX),Code=$(TSTAMPEVT)"
+
+## end timestamping configuration

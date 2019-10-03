@@ -1,0 +1,20 @@
+## start timing setup
+
+# First part of EVR prefix is SEC-SUB:DIS-DEV
+epicsEnvSet("EVR_NAME",      "$(RACKROW):$(EVR_DISDEV)")
+# Externally driven event, EVR expects integer
+epicsEnvSet("ExtEventCODE" "10")
+# event at 14 Hz (machine rate), EVR expects integer
+epicsEnvSet("MainEvtCODE"  "14")
+# pulse in LEBT is ~6 ms, EVR expects us
+epicsEnvSet("PULSE_WIDTH"    "2860")
+# event to trigger delay, EVR expects us
+epicsEnvSet("PULSE_DELAY"    "0")
+
+# E3-MRFIOC2 embedded startup command
+iocshLoad("$(mrfioc2_DIR)/evr-mtca-300.iocsh", "S=$(EVR_NAME), DEV=$(EVR_INDEX), PCIID=$(EVR_DEVID)")
+
+# Needed with software timestamp source w/o RT thread scheduling ###
+var evrMrmTimeNSOverflowThreshold 100000
+
+## end timing setup

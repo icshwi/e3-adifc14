@@ -1,0 +1,9 @@
+## start acquisition configuration
+
+# enable all channels
+dbpf $(ACQ_PREFIX)1-Control 1
+dbpf $(ACQ_PREFIX)2-Control 1
+dbpf $(ACQ_PREFIX)3-Control 1
+dbpf $(ACQ_PREFIX)4-Control 1
+
+## end acquisition configuration

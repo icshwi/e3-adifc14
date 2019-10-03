@@ -1,0 +1,5 @@
+## start autosave setup
+
+iocshLoad("$(autosave_DIR)/autosave.iocsh", "AS_TOP=$(AS_TOP),IOCNAME=$(RACKROW):$(ACQ_UNIT):")
+
+## end autosave setup

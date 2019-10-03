@@ -68,15 +68,12 @@ USR_INCLUDES += -I$(where_am_I)$(APPSRC)
 # USR_CPPFLAGS += -Wno-unused-function
 # USR_CPPFLAGS += -Wno-unused-but-set-variable
 
-USR_CPPFLAGS += -D_DBG
+#USR_CPPFLAGS += -D_DBG
 
 # TEMPLATES += $(wildcard $(APPDB)/*.db)
 # TEMPLATES += $(wildcard $(APPDB)/*.db)
 # TEMPLATES += $(wildcard $(APPDB)/*.proto)
-# TEMPLATES += $(wildcard $(APPDB)/*.template)
-
-TEMPLATES += $(APPDB)/ifc1400.template
-TEMPLATES += $(APPDB)/ifc1400N.template
+TEMPLATES += $(wildcard $(APPDB)/*.template)
 
 HEADERS += $(APPSRC)/ifc14.h
 SOURCES += $(APPSRC)/ifc14.cpp
@@ -188,8 +185,8 @@ DBDS += $(APPSRC)/adifc14Support.dbd
 
 
 
-SCRIPTS += $(wildcard ../iocsh/*.iocsh)
-
+SCRIPTS += $(wildcard ../iocsh/*.setup)
+SCRIPTS += $(wildcard ../iocsh/*.init)
 
 ## This RULE should be used in case of inflating DB files 
 ## db rule is the default in RULES_DB, so add the empty one

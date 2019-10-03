@@ -1,0 +1,17 @@
+## start acquisition channel setup
+
+# C = analog input channel index for AD 0 .. 9
+# N = analog input channel index for DB 1 .. 10
+# ACQ_SAMPLES = maximum number of samples
+
+# controls for analog input channel
+dbLoadRecords("ifc1400N.template",	 "P=$(ACQ_PREFIX),R=$(N)-,PORT=$(ACQ_PORT),ADDR=$(C),TIMEOUT=1, NAME=Channel $(N)")
+
+# process : Waveform for clients
+# chain   : debug
+# port    : CHx.RAW
+# plugin  : NDPluginStdArrays
+# purpose : Provide CA clients with raw waveform.
+#           No additional processing is performed.
+NDTraceConfigure("CH$(C).RAW", 3, 0, "$(ACQ_PORT)", $(C))
+dbLoadRecords("NDTrace.template",  "P=$(ACQ_PREFIX),R=$(N)-TR1-,PORT=CH$(C).RAW,ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(ACQ_PORT),NDARRAY_ADDR=$(C),TYPE=Float64,FTVL=DOUBLE,NELEMENTS=$(ACQ_SAMPLES),TIME_LINK=$(ACQ_PREFIX)TickValueR CP,NAME=CH$(C) Raw,ENABLED=1")

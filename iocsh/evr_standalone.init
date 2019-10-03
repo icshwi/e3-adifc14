@@ -1,0 +1,24 @@
+## start EVR standalone mode configuration
+
+# Enabling EVR standalone mode
+iocshLoad("$(mrfioc2_DIR)/evr-standalone-mode.iocsh", "S=$(EVR_NAME), DEV=$(EVR_INDEX)")
+
+# Configuring INPUT 0 to generate code 10 on positive edge
+dbpf $(EVR_NAME)-$(EVR_INDEX):In0-Trig-Ext-Sel "Edge"
+dbpf $(EVR_NAME)-$(EVR_INDEX):In0-Code-Ext-SP  $(ExtEventCODE)
+
+# Setting PULSER 0 to trigger from prescaler (14 Hz)
+dbpf $(EVR_NAME)-$(EVR_INDEX):DlyGen0-Evt-Trig0-SP $(MainEvtCODE)
+dbpf $(EVR_NAME)-$(EVR_INDEX):DlyGen0-Width-SP 1000 # time in us
+
+# Setting PULSER 1 to trigger from INPUT 0
+dbpf $(EVR_NAME)-$(EVR_INDEX):DlyGen1-Evt-Trig0-SP $(ExtEventCODE) 
+dbpf $(EVR_NAME)-$(EVR_INDEX):DlyGen1-Width-SP 1000 # time in us
+
+# Configuring RX17 backplane output to react from 14Hz
+dbpf $(EVR_NAME)-$(EVR_INDEX):OutBack0-Src-SP 0 
+
+# Configuring TX17 backplane output to react from 14Hz
+dbpf $(EVR_NAME)-$(EVR_INDEX):OutBack1-Src-SP 1 
+
+## end EVR standalone mode configuration

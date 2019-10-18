@@ -1,0 +1,22 @@
+## start acquisition channel setup
+
+# C = analog input channel index for AD 0 .. 9
+# N = analog input channel index for DB 1 .. 10
+# ACQ_SAMPLES = maximum number of samples
+
+# controls for analog input channel
+dbLoadRecords("ifc1400N.template",	 "P=$(ACQ_PREFIX),R=$(N)-,PORT=$(ACQ_PORT),ADDR=$(C),TIMEOUT=1, NAME=Channel $(N)")
+
+# process : NTND array server
+# chain   : debug
+# port    : CHx.RAW
+# plugin  : NDPluginPva
+# purpose : Provide PVA clients with NTND arrays.
+#           No additional processing is performed.
+NDTraceConfigure("CH$(C).RAW", 3, 0, "$(ACQ_PORT)", $(C))
+dbLoadRecords("NDTrace.template",  "P=$(ACQ_PREFIX),R=$(N)-TR1-,PORT=CH$(C).RAW,ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(ACQ_PORT),NDARRAY_ADDR=$(C),TYPE=Float64,FTVL=DOUBLE,NELEMENTS=$(ACQ_SAMPLES),TIME_LINK=$(ACQ_PREFIX)TickValueR CP,NAME=CH$(C) Raw,ENABLED=1")
+
+NDPvaConfigure("CH$(C).RAW", 3, 0, "$(ACQ_PORT)", $(C), $(ACQ_PREFIX)$(N)-TR1-NTNDArray, 0, 0, 0)
+dbLoadRecords("NDPva.template",  "P=$(ACQ_PREFIX),R=$(N)-TR1-,PORT=CH$(C).RAW,ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(ACQ_PORT)")
+
+
